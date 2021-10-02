@@ -14,6 +14,7 @@ app.use(express.static(path.join(path.resolve(), 'dist')));
 app.get('/', function(req, res) {
   res.sendFile(path.join(process.cwd(), 'dist/index.html'));
 });
+
 app.get('/api/version', function(req, res) {
   res.json({
     'NodeJS Version': process.version,
@@ -22,7 +23,7 @@ app.get('/api/version', function(req, res) {
 });
 
 // Error handler
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   res.status(500).send('Internal Serverless Error: ' + err);
 });
 
